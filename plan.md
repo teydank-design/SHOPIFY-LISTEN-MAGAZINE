@@ -82,14 +82,14 @@
 
 | Statut | Tâche | Priorité | Notes |
 |--------|-------|----------|-------|
-| `[ ]` | Installer et configurer GSAP dans le thème | 🔴 Haute | Via CDN ou npm selon setup |
-| `[ ]` | Intro animée au chargement (grain + reveal typographique) | 🔴 Haute | GSAP SplitText ou équivalent |
-| `[ ]` | Scroll parallax sur l'image de couverture hero | 🟡 Moyenne | GSAP ScrollTrigger |
-| `[ ]` | Transitions entre images de la galerie produit | 🟡 Moyenne | Fluide, effet hover grain |
-| `[ ]` | Micro-animations CTA au survol (inversion couleurs) | 🟡 Moyenne | Fond noir → blanc, texte blanc → noir |
-| `[ ]` | Apparition des sections au scroll (fade-in / slide-up) | 🟡 Moyenne | ScrollTrigger |
-| `[ ]` | Curseur custom (cercle ou croix Listen) | 🟡 Moyenne | Grossit au hover liens/images |
-| `[ ]` | Grain overlay animé en fond (toute la page) | 🔴 Haute | Voir `design.md` pour le CSS |
+| `[x]` | Installer GSAP dans le thème | 🔴 Haute | Via CDN dans `layout/theme.liquid` (GSAP 3.12.5) |
+| `[x]` | Intro animée au chargement (grain + reveal typographique) | 🔴 Haute | `snippets/intro-loader.liquid` + GSAP dans `theme.js` |
+| `[x]` | Scroll parallax sur l'image de couverture hero | 🟡 Moyenne | `initHeroParallax()` avec ScrollTrigger |
+| `[x]` | Transitions entre images de la galerie produit | 🟡 Moyenne | `initProductGallery()` avec fade |
+| `[x]` | Micro-animations CTA au survol (inversion couleurs) | 🟡 Moyenne | CSS pur dans `theme.css` |
+| `[x]` | Apparition des sections au scroll (fade-in / slide-up) | 🟡 Moyenne | `[data-reveal]` + `initScrollReveals()` |
+| `[x]` | Curseur custom | 🟡 Moyenne | `snippets/cursor-custom.liquid` + `initCursor()` JS |
+| `[x]` | Grain overlay animé en fond | 🔴 Haute | `snippets/grain-overlay.liquid` + CSS keyframes |
 
 ---
 
