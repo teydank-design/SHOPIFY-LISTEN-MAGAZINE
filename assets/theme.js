@@ -71,19 +71,17 @@ function initIntroLoader() {
   // Skip on tap / click
   loader.addEventListener('click', skipIntro, { once: true });
 
-  const LINE_H   = window.innerHeight * 0.25; // 25vh en px
-  const BOTTOM_Y = LINE_H * 3;               // 75vh — slot du bas (position top de l'item)
-  const ENTER_Y  = window.innerHeight;        // démarre 1 viewport plus bas (invisible)
+  const LINE_H = window.innerHeight * 0.25; // 25vh en px
 
   // items actuellement à l'écran
   const activeItems = [];
 
   /**
-   * Crée un item et l'anime depuis le bas vers son slot.
-   * Mouvement fluide (expo.out) + fade-in simultané.
-   * Tous les items existants montent d'un cran (LINE_H).
+   * Crée un item à son slot final (du haut vers le bas) et le révèle
+   * sur place — aucun mouvement, wipe clip-path de gauche à droite.
+   * Slot 0 = top (y=0), slot 1 = 25vh, slot 2 = 50vh, slot 3 = 75vh.
    * @param {string} text
-   * @returns {Promise} résolu quand l'item est arrivé à destination
+   * @returns {Promise} résolu quand l'item est apparu
    */
   function addItem(text) {
     return new Promise((resolve) => {
@@ -92,24 +90,15 @@ function initIntroLoader() {
       el.textContent = text;
       ticker.appendChild(el);
 
-      // Départ : hors-écran en bas, invisible
-      gsap.set(el, { top: ENTER_Y, opacity: 0 });
+      // Slot = index courant × 25vh — positionné directement, sans mouvement
+      const slotY = activeItems.length * LINE_H;
+      gsap.set(el, { top: slotY, clipPath: 'inset(0 100% 0 0)' });
 
-      // Décaler les items existants vers le haut — même courbe, même durée
-      activeItems.forEach((existing) => {
-        gsap.to(existing, {
-          top: `-=${LINE_H}`,
-          duration: 0.65,
-          ease: 'expo.out',
-        });
-      });
-
-      // Entrée : descente vers le slot bas + fade-in
+      // Révéler sur place : wipe de gauche à droite
       gsap.to(el, {
-        top: BOTTOM_Y,
-        opacity: 1,
-        duration: 0.65,
-        ease: 'expo.out',
+        clipPath: 'inset(0 0% 0 0)',
+        duration: 0.5,
+        ease: 'power3.out',
         onComplete: resolve,
       });
 
@@ -118,18 +107,17 @@ function initIntroLoader() {
   }
 
   /**
-   * Expulse tous les items vers le haut hors du viewport — smooth + fade.
+   * Efface tous les items avec un wipe inverse (droite → gauche), staggeré.
    * @returns {Promise}
    */
   function clearItems() {
     return new Promise((resolve) => {
       if (activeItems.length === 0) { resolve(); return; }
       gsap.to(activeItems, {
-        top: -LINE_H,
-        opacity: 0,
-        duration: 0.55,
-        ease: 'expo.in',
-        stagger: 0.06,
+        clipPath: 'inset(0 0% 0 100%)',
+        duration: 0.4,
+        ease: 'power3.in',
+        stagger: 0.05,
         onComplete: () => {
           activeItems.forEach((el) => el.remove());
           activeItems.length = 0;
