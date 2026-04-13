@@ -1,0 +1,61 @@
+<nav class="site-nav" role="navigation" aria-label="Navigation principale">
+  <a href="{{ routes.root_url }}" class="site-nav__logo" aria-label="{{ shop.name }}">
+    {{- section.settings.logo_text | default: shop.name -}}
+  </a>
+
+  <ul class="site-nav__links">
+    <li><a href="{{ routes.root_url }}">Accueil</a></li>
+    {%- if section.settings.show_product_link -%}
+      <li>
+        <a href="{{ routes.collections_url }}/opus-1">
+          {{ section.settings.product_link_label | default: 'Opus 1' }}
+        </a>
+      </li>
+    {%- endif -%}
+    {%- if section.settings.show_about_link -%}
+      <li><a href="#about">{{ section.settings.about_link_label | default: 'À propos' }}</a></li>
+    {%- endif -%}
+  </ul>
+
+  <button class="btn btn--outline" style="padding:10px 20px; font-size:11px;" data-open-cart aria-label="Ouvrir le panier">
+    Panier ({{ cart.item_count }})
+  </button>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Texte du logo",
+      "default": "Listen"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_link",
+      "label": "Afficher lien Opus 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "product_link_label",
+      "label": "Label lien produit",
+      "default": "Opus 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_about_link",
+      "label": "Afficher lien À propos",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "about_link_label",
+      "label": "Label À propos",
+      "default": "À propos"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,24 @@
+{
+  "general": {
+    "shop_name": "Listen Magazine"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Order now",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Cart",
+      "empty": "Your cart is empty",
+      "checkout": "Checkout",
+      "total": "Total",
+      "remove": "Remove"
+    }
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  }
+}

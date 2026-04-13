@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Magazine — Édition limitée",
+        "hero_title": "Listen|Magazine",
+        "price_display": "25 €",
+        "show_edition_badge": true,
+        "edition_label": "Édition limitée",
+        "cta_label": "Commander maintenant",
+        "release_date": "Sortie — 20 juin"
+      }
+    },
+    "about": {
+      "type": "about",
+      "settings": {
+        "section_number": "01",
+        "eyebrow": "À propos de Listen",
+        "manifesto": "<p>Listen est un objet éditorial <strong>brut et vivant</strong>. Ni magazine ordinaire, ni simple boutique en ligne. Un geste culturel — rare, sincère, fait pour durer.</p>",
+        "format_description": "<p>Entre magazine imprimé et expérience digitale. Chaque opus est une édition limitée numérotée, pensée comme un objet à posséder.</p>"
+      }
+    },
+    "contributors": {
+      "type": "contributors",
+      "settings": {
+        "eyebrow": "Opus 1",
+        "title": "Contributeurs",
+        "show_extracts": true
+      },
+      "blocks": {}
+    }
+  },
+  "order": ["hero", "about", "contributors"]
+}

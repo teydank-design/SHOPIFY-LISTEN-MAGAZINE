@@ -1,0 +1,150 @@
+<footer class="site-footer section--dark">
+  <div class="container">
+
+    <div class="footer-top">
+      <!-- Newsletter -->
+      <div class="footer-newsletter">
+        <h3 class="footer-newsletter__title">
+          {{- section.settings.newsletter_title | default: 'Restez dans la boucle' -}}
+        </h3>
+
+        {%- form 'customer', id: 'footer-newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter-form">
+            <input
+              type="email"
+              name="contact[email]"
+              id="footer-email"
+              placeholder="{{ section.settings.newsletter_placeholder | default: 'Votre email' }}"
+              required
+              autocomplete="email"
+            >
+            <button type="submit">
+              {{- section.settings.newsletter_cta | default: 'OK' -}}
+            </button>
+          </div>
+          {%- if form.posted_successfully? -%}
+            <p class="t-label" style="margin-top: 12px; color: rgba(255,255,255,0.6);">
+              Merci — on vous tiendra au courant.
+            </p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+      <!-- Social links -->
+      <nav class="footer-social" aria-label="Réseaux sociaux">
+        {%- if section.settings.instagram != blank -%}
+          <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+            Instagram
+          </a>
+        {%- endif -%}
+        {%- if section.settings.tiktok != blank -%}
+          <a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+            TikTok
+          </a>
+        {%- endif -%}
+        {%- if section.settings.twitter != blank -%}
+          <a href="{{ section.settings.twitter }}" target="_blank" rel="noopener" aria-label="X / Twitter">
+            X
+          </a>
+        {%- endif -%}
+      </nav>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p class="footer-bottom__copy">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}.
+        {%- if section.settings.tagline != blank -%}
+          &nbsp;{{ section.settings.tagline }}
+        {%- endif -%}
+      </p>
+
+      <ul class="footer-bottom__legal">
+        {%- if section.settings.legal_url != blank -%}
+          <li>
+            <a href="{{ section.settings.legal_url }}">Mentions légales</a>
+          </li>
+        {%- endif -%}
+        {%- if section.settings.privacy_url != blank -%}
+          <li>
+            <a href="{{ section.settings.privacy_url }}">Confidentialité</a>
+          </li>
+        {%- endif -%}
+        <li>
+          <a href="{{ routes.root_url }}pages/cgv">CGV</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Titre newsletter",
+      "default": "Restez dans la boucle"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder email",
+      "default": "Votre email"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_cta",
+      "label": "Texte bouton",
+      "default": "OK"
+    },
+    {
+      "type": "header",
+      "content": "Réseaux sociaux"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "tiktok",
+      "label": "TikTok"
+    },
+    {
+      "type": "url",
+      "id": "twitter",
+      "label": "X / Twitter"
+    },
+    {
+      "type": "header",
+      "content": "Bas de page"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Brut. Vivant. Collectif."
+    },
+    {
+      "type": "url",
+      "id": "legal_url",
+      "label": "URL Mentions légales"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "URL Politique de confidentialité"
+    }
+  ]
+}
+{% endschema %}

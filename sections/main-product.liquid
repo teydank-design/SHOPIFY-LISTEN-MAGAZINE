@@ -1,0 +1,145 @@
+{%- assign product = product -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="product-section section--dark">
+  <div class="container">
+    <div class="grid" style="align-items:start;">
+
+      <!-- Gallery — 7 cols -->
+      <div class="product-gallery" style="grid-column: span 7;" data-reveal>
+        <div class="product-gallery__main">
+          <img
+            id="product-main-image"
+            src="{{ product.featured_image | image_url: width: 1200 }}"
+            srcset="
+              {{ product.featured_image | image_url: width: 600 }} 600w,
+              {{ product.featured_image | image_url: width: 900 }} 900w,
+              {{ product.featured_image | image_url: width: 1200 }} 1200w
+            "
+            sizes="(max-width: 768px) 100vw, 58vw"
+            alt="{{ product.featured_image.alt | default: product.title | escape }}"
+            width="800"
+            height="1067"
+            loading="eager"
+          >
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="product-gallery__thumbs">
+            {%- for image in product.images limit: 8 -%}
+              <button
+                class="product-gallery__thumb {% if forloop.first %}is-active{% endif %}"
+                data-src="{{ image | image_url: width: 1200 }}"
+                data-srcset="{{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 1200 }} 1200w"
+                aria-label="Image {{ forloop.index }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 300 }}"
+                  alt="{{ image.alt | escape }}"
+                  width="150"
+                  height="200"
+                  loading="lazy"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Product info — 5 cols -->
+      <div class="product-info" style="grid-column: span 5; position: sticky; top: 100px;">
+
+        <!-- Limited edition badge -->
+        <p class="product-info__badge" data-reveal>
+          Édition limitée numérotée
+        </p>
+
+        <!-- Title -->
+        <h1 class="product-info__title" data-reveal>{{ product.title }}</h1>
+        <p class="product-info__opus t-label" data-reveal>
+          {{- product.metafields.custom.opus_number | default: 'Opus 1' -}}
+        </p>
+
+        <!-- Price -->
+        <div data-reveal>
+          <p class="product-info__price">
+            {{- current_variant.price | money -}}
+          </p>
+
+          <!-- Stock counter -->
+          {%- if current_variant.inventory_management == 'shopify' -%}
+            <p
+              class="product-info__stock"
+              data-stock-count="{{ current_variant.inventory_quantity }}"
+            >
+              {{ current_variant.inventory_quantity }} exemplaires disponibles
+            </p>
+          {%- endif -%}
+        </div>
+
+        <!-- Add to cart form -->
+        <div data-reveal>
+          {%- form 'product', product, id: 'product-form', novalidate: 'novalidate' -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+
+            <div class="product-form__buy">
+              {%- if current_variant.available -%}
+                <button
+                  type="submit"
+                  name="add"
+                  class="btn btn--buy"
+                  aria-label="Ajouter au panier — {{ product.title }}"
+                >
+                  Commander — {{ current_variant.price | money }}
+                </button>
+              {%- else -%}
+                <button type="button" class="btn btn--buy" disabled style="opacity:0.4; cursor:default;">
+                  Épuisé
+                </button>
+              {%- endif -%}
+            </div>
+          {%- endform -%}
+
+          <p class="product-info__shipping">
+            Livraison France + International · Expédition sous 48h
+          </p>
+        </div>
+
+        <!-- Description -->
+        {%- if product.description != blank -%}
+          <div class="product-info__description t-body" data-reveal>
+            {{ product.description }}
+          </div>
+        {%- endif -%}
+
+        <!-- Audio extracts -->
+        {%- if product.metafields.custom.audio_url != blank -%}
+          <div data-reveal style="margin-top: 32px;">
+            <p class="t-label" style="margin-bottom: 12px; color: var(--color-text-muted);">Extrait audio</p>
+            {%- render 'audio-player',
+              src: product.metafields.custom.audio_url,
+              track_name: product.metafields.custom.audio_track_name | default: 'Extrait — Opus 1'
+            -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Number display -->
+        {%- if product.metafields.custom.edition_number != blank -%}
+          <div data-reveal style="margin-top:32px; padding-top:24px; border-top: 1px solid rgba(255,255,255,0.08);">
+            <p class="t-label" style="color:var(--color-text-muted); margin-bottom:8px;">Votre exemplaire</p>
+            <p class="t-subtitle">N° {{ product.metafields.custom.edition_number }}</p>
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product main",
+  "tag": "div"
+}
+{% endschema %}

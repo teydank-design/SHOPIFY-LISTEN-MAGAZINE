@@ -1,0 +1,74 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Listen Magazine",
+    "theme_version": "1.0.0",
+    "theme_author": "Listen Magazine",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Fond principal",
+        "default": "#0A0A0A"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texte principal",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Couleur accent",
+        "default": "#E5001B"
+      }
+    ]
+  },
+  {
+    "name": "Grain",
+    "settings": [
+      {
+        "type": "range",
+        "id": "grain_opacity",
+        "label": "Opacité du grain",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "unit": "%",
+        "default": 5
+      },
+      {
+        "type": "checkbox",
+        "id": "grain_animated",
+        "label": "Grain animé",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "X / Twitter"
+      }
+    ]
+  }
+]

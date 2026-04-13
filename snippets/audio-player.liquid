@@ -1,0 +1,34 @@
+{%- comment -%}
+  Audio player snippet
+  Usage: {% render 'audio-player', src: audio_url, track_name: 'Track name' %}
+{%- endcomment -%}
+
+<div class="audio-player" data-audio-player>
+  <audio src="{{ src }}" preload="none"></audio>
+
+  <button class="audio-player__btn audio-player__btn--play" aria-label="Lire / Pause">
+    <!-- Play icon -->
+    <svg class="icon-play" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="2,1 13,7 2,13" fill="currentColor"/>
+    </svg>
+    <!-- Pause icon (hidden by default) -->
+    <svg class="icon-pause hidden" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="1" width="4" height="12" fill="currentColor"/>
+      <rect x="8" y="1" width="4" height="12" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <div class="audio-player__info">
+    <p class="audio-player__track">{{ track_name | default: 'Extrait audio' }}</p>
+    <div class="audio-player__progress" role="progressbar" aria-label="Progression audio">
+      <div class="audio-player__progress-fill" style="width: 0%;"></div>
+    </div>
+  </div>
+
+  <span class="audio-player__time">—:——</span>
+</div>
+
+<style>
+  .icon-play, .icon-pause { display: block; }
+  .hidden { display: none !important; }
+</style>

@@ -1,0 +1,144 @@
+<section class="hero section--dark" aria-label="Hero">
+
+  <!-- Background image with parallax -->
+  <div class="hero__bg">
+    {%- if section.settings.hero_image != blank -%}
+      <img
+        src="{{ section.settings.hero_image | image_url: width: 2000 }}"
+        srcset="
+          {{ section.settings.hero_image | image_url: width: 800 }} 800w,
+          {{ section.settings.hero_image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.hero_image | image_url: width: 1800 }} 1800w,
+          {{ section.settings.hero_image | image_url: width: 2400 }} 2400w
+        "
+        sizes="100vw"
+        alt="{{ section.settings.hero_image.alt | escape }}"
+        width="2000"
+        height="1333"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {%- else -%}
+      <!-- Placeholder: dark gradient until image is set -->
+      <div style="width:100%; height:100%; background: linear-gradient(135deg, #0A0A0A 0%, #1C1C1C 100%);"></div>
+    {%- endif -%}
+  </div>
+
+  <!-- Hero content -->
+  <div class="hero__content">
+    <p class="hero__eyebrow">
+      {{- section.settings.eyebrow | default: 'Magazine — Édition limitée' -}}
+    </p>
+
+    <h1 class="hero__title">
+      {%- assign title_lines = section.settings.hero_title | default: 'Listen Magazine' | split: '|' -%}
+      {%- for line in title_lines -%}
+        <span class="hero__title-line">{{ line }}</span>
+      {%- endfor -%}
+    </h1>
+
+    <div class="hero__meta">
+      {%- if section.settings.product != blank -%}
+        {%- assign hero_product = all_products[section.settings.product] -%}
+        <span class="hero__price">{{ hero_product.price | money }}</span>
+      {%- elsif section.settings.price_display != blank -%}
+        <span class="hero__price">{{ section.settings.price_display }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.show_edition_badge -%}
+        <span class="hero__edition">
+          {{- section.settings.edition_label | default: 'Édition limitée' -}}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.cta_url != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="btn btn--primary btn--large">
+          {{- section.settings.cta_label | default: 'Commander maintenant' -}}
+        </a>
+      {%- elsif section.settings.product != blank -%}
+        <a href="{{ hero_product.url }}" class="btn btn--primary btn--large">
+          {{- section.settings.cta_label | default: 'Commander maintenant' -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Release date display -->
+  {%- if section.settings.release_date != blank -%}
+    <div class="hero__scroll-hint">
+      {{- section.settings.release_date -}}
+    </div>
+  {%- endif -%}
+
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Image hero"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texte au-dessus du titre",
+      "default": "Magazine — Édition limitée"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Titre (séparer les lignes avec |)",
+      "default": "Listen|Magazine"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produit lié (prix automatique)"
+    },
+    {
+      "type": "text",
+      "id": "price_display",
+      "label": "Prix affiché (si pas de produit lié)",
+      "default": "25 €"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_edition_badge",
+      "label": "Afficher badge édition limitée",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "edition_label",
+      "label": "Texte badge",
+      "default": "Édition limitée"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "URL du CTA (optionnel si produit lié)"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texte du CTA",
+      "default": "Commander maintenant"
+    },
+    {
+      "type": "text",
+      "id": "release_date",
+      "label": "Date de sortie (affiché verticalement)",
+      "default": "Sortie — 20 juin"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Listen"
+    }
+  ]
+}
+{% endschema %}

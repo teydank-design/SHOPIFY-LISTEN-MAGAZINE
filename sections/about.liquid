@@ -1,0 +1,126 @@
+<section class="about-section section--dark" id="about">
+  <div class="container" style="position: relative;">
+
+    <!-- Big background number -->
+    <span class="about-section__number" aria-hidden="true">
+      {{- section.settings.section_number | default: '01' -}}
+    </span>
+
+    <div class="grid" style="align-items: center; row-gap: clamp(40px, 6vw, 80px);">
+
+      <!-- Manifesto text — 8 cols -->
+      <div style="grid-column: span 8;" data-reveal>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="t-label" style="color: var(--color-text-muted); margin-bottom: 24px;">
+            {{- section.settings.eyebrow -}}
+          </p>
+        {%- endif -%}
+
+        <div class="about-section__manifesto">
+          {{- section.settings.manifesto | default: 'Listen est un objet éditorial <em>brut et vivant</em>.' -}}
+        </div>
+      </div>
+
+      <!-- Right column — image or text -->
+      {%- if section.settings.side_image != blank -%}
+        <div style="grid-column: span 4;" data-reveal="left">
+          <div style="aspect-ratio: 2/3; overflow: hidden;">
+            <img
+              src="{{ section.settings.side_image | image_url: width: 800 }}"
+              alt="{{ section.settings.side_image.alt | escape }}"
+              width="400"
+              height="600"
+              loading="lazy"
+              style="width:100%; height:100%; object-fit:cover; filter: grayscale(100%) contrast(1.1);"
+            >
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- Format description -->
+      {%- if section.settings.format_description != blank -%}
+        <div style="grid-column: span 6;" data-reveal>
+          <p class="t-label" style="color: var(--color-text-muted); margin-bottom: 16px;">
+            Format hybride
+          </p>
+          <p class="t-body" style="color: rgba(255,255,255,0.7);">
+            {{- section.settings.format_description -}}
+          </p>
+        </div>
+      {%- endif -%}
+
+      <!-- Social links -->
+      {%- if section.settings.instagram != blank or section.settings.tiktok != blank -%}
+        <div style="grid-column: span 6;" data-reveal>
+          <p class="t-label" style="color: var(--color-text-muted); margin-bottom: 20px;">Suivre Listen</p>
+          <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            {%- if section.settings.instagram != blank -%}
+              <a href="{{ section.settings.instagram }}" class="btn btn--outline" target="_blank" rel="noopener">
+                Instagram
+              </a>
+            {%- endif -%}
+            {%- if section.settings.tiktok != blank -%}
+              <a href="{{ section.settings.tiktok }}" class="btn btn--outline" target="_blank" rel="noopener">
+                TikTok
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "À propos",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_number",
+      "label": "Numéro de section (fond)",
+      "default": "01"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sous-titre au-dessus",
+      "default": "À propos de Listen"
+    },
+    {
+      "type": "richtext",
+      "id": "manifesto",
+      "label": "Manifeste (HTML autorisé)",
+      "default": "<p>Listen est un objet éditorial <strong>brut et vivant</strong>. Ni magazine ordinaire, ni simple boutique. Un geste culturel — rare, sincère, fait pour durer.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "side_image",
+      "label": "Image latérale (optionnel)"
+    },
+    {
+      "type": "richtext",
+      "id": "format_description",
+      "label": "Description du format hybride",
+      "default": "<p>Entre magazine imprimé et expérience digitale. Chaque opus est une édition limitée numérotée, pensée comme un objet à posséder.</p>"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "URL Instagram"
+    },
+    {
+      "type": "url",
+      "id": "tiktok",
+      "label": "URL TikTok"
+    }
+  ],
+  "presets": [
+    {
+      "name": "À propos Listen"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,157 @@
+<section class="contributors-section section--dark" id="contributeurs">
+  <div class="container">
+
+    <div style="margin-bottom: clamp(40px, 6vw, 72px);" data-reveal>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="t-label" style="color: var(--color-text-muted); margin-bottom: 12px;">
+          {{- section.settings.eyebrow -}}
+        </p>
+      {%- endif -%}
+      <h2 class="t-section">{{ section.settings.title | default: 'Contributeurs' }}</h2>
+    </div>
+
+    <!-- Contributors grid -->
+    <div class="grid" style="row-gap: clamp(40px, 6vw, 64px);">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'contributor' -%}
+            <div
+              class="contributor-card"
+              style="grid-column: span 3;"
+              data-reveal
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.image != blank -%}
+                <div class="contributor-card__image">
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.name | escape }}"
+                    width="300"
+                    height="450"
+                    loading="lazy"
+                  >
+                </div>
+              {%- else -%}
+                <div class="contributor-card__image" style="background: var(--color-bg-alt);"></div>
+              {%- endif -%}
+
+              <p class="contributor-card__role">{{ block.settings.role }}</p>
+              <h3 class="contributor-card__name">{{ block.settings.name }}</h3>
+
+              {%- if block.settings.bio != blank -%}
+                <p class="t-body" style="margin-top: 8px; color: rgba(255,255,255,0.6); font-size: 14px;">
+                  {{- block.settings.bio -}}
+                </p>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <!-- Visual extracts -->
+    {%- if section.settings.show_extracts -%}
+      <div style="margin-top: clamp(60px, 8vw, 100px);" data-reveal>
+        <p class="t-label" style="color: var(--color-text-muted); margin-bottom: 24px;">
+          Extraits visuels
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 4px;">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'visual_extract' -%}
+              <div style="aspect-ratio: 3/4; overflow: hidden;" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.caption | escape }}"
+                    width="300"
+                    height="400"
+                    loading="lazy"
+                    style="width:100%; height:100%; object-fit:cover; filter: contrast(1.1) saturate(0.85);"
+                  >
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contributeurs",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texte au-dessus",
+      "default": "Opus 1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre de section",
+      "default": "Contributeurs"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_extracts",
+      "label": "Afficher les extraits visuels",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contributor",
+      "name": "Contributeur",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nom",
+          "default": "Nom du contributeur"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Rôle",
+          "default": "Photographe"
+        },
+        {
+          "type": "textarea",
+          "id": "bio",
+          "label": "Biographie courte (optionnel)"
+        }
+      ]
+    },
+    {
+      "type": "visual_extract",
+      "name": "Extrait visuel",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image extrait"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Légende (alt text)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contributeurs Listen"
+    }
+  ]
+}
+{% endschema %}
