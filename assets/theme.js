@@ -90,15 +90,18 @@ function initIntroLoader() {
       el.textContent = text;
       ticker.appendChild(el);
 
-      // Slot = index courant × 25vh — positionné directement, sans mouvement
+      // Slot = index courant × 25vh
       const slotY = activeItems.length * LINE_H;
-      gsap.set(el, { top: slotY, clipPath: 'inset(0 100% 0 0)' });
 
-      // Révéler sur place : wipe de gauche à droite
+      // Départ : position finale, décalé vers le haut + invisible
+      gsap.set(el, { top: slotY, opacity: 0, y: -28 });
+
+      // Fade down : glisse vers le bas tout en apparaissant
       gsap.to(el, {
-        clipPath: 'inset(0 0% 0 0)',
-        duration: 0.5,
-        ease: 'power3.out',
+        opacity: 1,
+        y: 0,
+        duration: 0.38,
+        ease: 'power2.out',
         onComplete: resolve,
       });
 
@@ -114,10 +117,11 @@ function initIntroLoader() {
     return new Promise((resolve) => {
       if (activeItems.length === 0) { resolve(); return; }
       gsap.to(activeItems, {
-        clipPath: 'inset(0 0% 0 100%)',
-        duration: 0.4,
-        ease: 'power3.in',
-        stagger: 0.05,
+        opacity: 0,
+        y: 20,
+        duration: 0.25,
+        ease: 'power2.in',
+        stagger: 0.04,
         onComplete: () => {
           activeItems.forEach((el) => el.remove());
           activeItems.length = 0;
@@ -155,29 +159,29 @@ function initIntroLoader() {
   async function runSequence() {
     // Phase 1 — .NO  (~300ms entre chaque, la durée d'anim est 650ms)
     await addItem('.NO');  if (skipped) return;
-    await wait(100);
+    await wait(60);
     await addItem('.NO');  if (skipped) return;
-    await wait(100);
+    await wait(60);
     await addItem('.NO');  if (skipped) return;
-    await wait(100);
+    await wait(60);
     await addItem('.NO');  if (skipped) return;
 
     // Pause — 4 lignes à l'écran
-    await wait(280);       if (skipped) return;
+    await wait(200);       if (skipped) return;
 
     // Transition : vider l'écran
     await clearItems();    if (skipped) return;
-    await wait(80);        if (skipped) return;
+    await wait(60);        if (skipped) return;
 
     // Phase 2 — .LISTEN
     await addItem('.LISTEN'); if (skipped) return;
-    await wait(420);
+    await wait(280);
     await addItem('.LISTEN'); if (skipped) return;
-    await wait(420);
+    await wait(280);
     await addItem('.LISTEN'); if (skipped) return;
 
     // Maintien avant sortie
-    await wait(500);
+    await wait(400);
 
     // Fade out → hero
     dismissLoader();
