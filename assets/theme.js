@@ -80,6 +80,7 @@ function initIntroLoader() {
 
   /**
    * Crée un item et l'anime depuis le bas vers son slot.
+   * Mouvement fluide (expo.out) + fade-in simultané.
    * Tous les items existants montent d'un cran (LINE_H).
    * @param {string} text
    * @returns {Promise} résolu quand l'item est arrivé à destination
@@ -91,23 +92,24 @@ function initIntroLoader() {
       el.textContent = text;
       ticker.appendChild(el);
 
-      // Positionner le nouvel item hors-écran en bas
-      gsap.set(el, { top: ENTER_Y });
+      // Départ : hors-écran en bas, invisible
+      gsap.set(el, { top: ENTER_Y, opacity: 0 });
 
-      // Décaler les items existants vers le haut
+      // Décaler les items existants vers le haut — même courbe, même durée
       activeItems.forEach((existing) => {
         gsap.to(existing, {
           top: `-=${LINE_H}`,
-          duration: 0.32,
-          ease: 'power2.out',
+          duration: 0.65,
+          ease: 'expo.out',
         });
       });
 
-      // Faire entrer le nouvel item jusqu'au slot bas (75vh)
+      // Entrée : descente vers le slot bas + fade-in
       gsap.to(el, {
         top: BOTTOM_Y,
-        duration: 0.32,
-        ease: 'power2.out',
+        opacity: 1,
+        duration: 0.65,
+        ease: 'expo.out',
         onComplete: resolve,
       });
 
@@ -116,18 +118,18 @@ function initIntroLoader() {
   }
 
   /**
-   * Expulse tous les items vers le haut hors du viewport.
+   * Expulse tous les items vers le haut hors du viewport — smooth + fade.
    * @returns {Promise}
    */
   function clearItems() {
     return new Promise((resolve) => {
       if (activeItems.length === 0) { resolve(); return; }
-      const exitY = -LINE_H;
       gsap.to(activeItems, {
-        top: exitY,
-        duration: 0.3,
-        ease: 'power2.in',
-        stagger: 0.04,
+        top: -LINE_H,
+        opacity: 0,
+        duration: 0.55,
+        ease: 'expo.in',
+        stagger: 0.06,
         onComplete: () => {
           activeItems.forEach((el) => el.remove());
           activeItems.length = 0;
@@ -163,31 +165,31 @@ function initIntroLoader() {
 
   // ── Séquence principale ──────────────────────────────────
   async function runSequence() {
-    // Phase 1 — .NO  (interval ~300ms entre chaque)
+    // Phase 1 — .NO  (~300ms entre chaque, la durée d'anim est 650ms)
     await addItem('.NO');  if (skipped) return;
-    await wait(180);
+    await wait(260);
     await addItem('.NO');  if (skipped) return;
-    await wait(180);
+    await wait(260);
     await addItem('.NO');  if (skipped) return;
-    await wait(180);
+    await wait(260);
     await addItem('.NO');  if (skipped) return;
 
     // Pause — 4 lignes à l'écran
-    await wait(420);       if (skipped) return;
+    await wait(500);       if (skipped) return;
 
     // Transition : vider l'écran
     await clearItems();    if (skipped) return;
-    await wait(80);        if (skipped) return;
+    await wait(120);       if (skipped) return;
 
-    // Phase 2 — .LISTEN (interval ~1s comme dans la spec)
+    // Phase 2 — .LISTEN (~1s entre chaque)
     await addItem('.LISTEN'); if (skipped) return;
-    await wait(820);
+    await wait(900);
     await addItem('.LISTEN'); if (skipped) return;
-    await wait(820);
+    await wait(900);
     await addItem('.LISTEN'); if (skipped) return;
 
-    // Maintien bref avant sortie
-    await wait(600);
+    // Maintien avant sortie
+    await wait(700);
 
     // Fade out → hero
     dismissLoader();

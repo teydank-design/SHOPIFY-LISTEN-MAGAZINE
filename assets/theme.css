@@ -161,8 +161,7 @@ button {
   height: 25vh;
   display: flex;
   align-items: center;
-  /* Left-aligned with margin, matching hero left edge */
-  padding-left: clamp(20px, 6vw, 120px);
+  justify-content: center;
   font-family: var(--font-family);
   font-size: clamp(52px, 15vw, 220px);
   font-weight: var(--fw-black);
@@ -170,10 +169,9 @@ button {
   text-transform: uppercase;
   line-height: 1;
   letter-spacing: -0.02em;
-  /* Prevent text from wrapping or affecting layout */
   white-space: nowrap;
   user-select: none;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 /* ── Typography ──────────────────────────────────────────── */
