@@ -51,57 +51,167 @@ function initCursor() {
   document.addEventListener('mouseup',   () => cursor.classList.remove('cursor--click'));
 }
 
-/* ── Intro Loader ─────────────────────────────────────────── */
+/* ── Intro Loader — ticker .NO / .LISTEN ─────────────────── */
+/*
+ * Séquence :
+ *  Phase 1 (0 → ~2s)  : 4× ".NO"  apparaissent depuis le bas, ~300ms entre chaque
+ *  Phase 2 (~2 → ~5s) : 3× ".LISTEN" sur le même mécanisme
+ *  Fin                 : fade out blanc → reveal hero
+ */
 function initIntroLoader() {
-  const loader = document.querySelector('.intro-loader');
-  const logoEl = document.querySelector('.intro-loader__logo');
-  const subEl  = document.querySelector('.intro-loader__sub');
+  const loader = document.getElementById('intro-loader');
+  const ticker = document.getElementById('intro-ticker');
 
-  if (!loader || typeof gsap === 'undefined') {
+  if (!loader || !ticker || typeof gsap === 'undefined') {
+    if (loader) loader.remove();
     revealPage();
     return;
   }
 
-  const tl = gsap.timeline({
-    onComplete: () => {
-      revealPage();
-      gsap.to(loader, {
-        yPercent: -100,
-        duration: 0.8,
-        ease: 'power3.inOut',
-        onComplete: () => loader.remove()
-      });
-    }
-  });
+  // Skip on tap / click
+  loader.addEventListener('click', skipIntro, { once: true });
 
-  tl
-    .to(logoEl, {
-      clipPath: 'inset(0 0% 0 0)',
-      duration: 1.0,
-      ease: 'power4.out',
-    }, 0.2)
-    .to(subEl, {
-      opacity: 1,
-      duration: 0.5,
-      ease: 'power2.out',
-    }, 0.8)
-    .to({}, { duration: 0.6 });
+  const LINE_H   = window.innerHeight * 0.25; // 25vh en px
+  const BOTTOM_Y = LINE_H * 3;               // 75vh — slot du bas (position top de l'item)
+  const ENTER_Y  = window.innerHeight;        // démarre 1 viewport plus bas (invisible)
+
+  // items actuellement à l'écran
+  const activeItems = [];
+
+  /**
+   * Crée un item et l'anime depuis le bas vers son slot.
+   * Tous les items existants montent d'un cran (LINE_H).
+   * @param {string} text
+   * @returns {Promise} résolu quand l'item est arrivé à destination
+   */
+  function addItem(text) {
+    return new Promise((resolve) => {
+      const el = document.createElement('div');
+      el.className = 'intro-ticker__item';
+      el.textContent = text;
+      ticker.appendChild(el);
+
+      // Positionner le nouvel item hors-écran en bas
+      gsap.set(el, { top: ENTER_Y });
+
+      // Décaler les items existants vers le haut
+      activeItems.forEach((existing) => {
+        gsap.to(existing, {
+          top: `-=${LINE_H}`,
+          duration: 0.32,
+          ease: 'power2.out',
+        });
+      });
+
+      // Faire entrer le nouvel item jusqu'au slot bas (75vh)
+      gsap.to(el, {
+        top: BOTTOM_Y,
+        duration: 0.32,
+        ease: 'power2.out',
+        onComplete: resolve,
+      });
+
+      activeItems.push(el);
+    });
+  }
+
+  /**
+   * Expulse tous les items vers le haut hors du viewport.
+   * @returns {Promise}
+   */
+  function clearItems() {
+    return new Promise((resolve) => {
+      if (activeItems.length === 0) { resolve(); return; }
+      const exitY = -LINE_H;
+      gsap.to(activeItems, {
+        top: exitY,
+        duration: 0.3,
+        ease: 'power2.in',
+        stagger: 0.04,
+        onComplete: () => {
+          activeItems.forEach((el) => el.remove());
+          activeItems.length = 0;
+          resolve();
+        },
+      });
+    });
+  }
+
+  /** Simple délai promisifié */
+  function wait(ms) {
+    return new Promise((r) => setTimeout(r, ms));
+  }
+
+  let skipped = false;
+  function skipIntro() {
+    skipped = true;
+    gsap.killTweensOf('*');
+    dismissLoader();
+  }
+
+  function dismissLoader() {
+    gsap.to(loader, {
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        loader.remove();
+        revealPage();
+      },
+    });
+  }
+
+  // ── Séquence principale ──────────────────────────────────
+  async function runSequence() {
+    // Phase 1 — .NO  (interval ~300ms entre chaque)
+    await addItem('.NO');  if (skipped) return;
+    await wait(180);
+    await addItem('.NO');  if (skipped) return;
+    await wait(180);
+    await addItem('.NO');  if (skipped) return;
+    await wait(180);
+    await addItem('.NO');  if (skipped) return;
+
+    // Pause — 4 lignes à l'écran
+    await wait(420);       if (skipped) return;
+
+    // Transition : vider l'écran
+    await clearItems();    if (skipped) return;
+    await wait(80);        if (skipped) return;
+
+    // Phase 2 — .LISTEN (interval ~1s comme dans la spec)
+    await addItem('.LISTEN'); if (skipped) return;
+    await wait(820);
+    await addItem('.LISTEN'); if (skipped) return;
+    await wait(820);
+    await addItem('.LISTEN'); if (skipped) return;
+
+    // Maintien bref avant sortie
+    await wait(600);
+
+    // Fade out → hero
+    dismissLoader();
+  }
+
+  runSequence();
 }
 
+/* ── Hero reveal (appelé après la sortie du loader) ─────── */
 function revealPage() {
   if (typeof gsap === 'undefined') return;
 
   const hero = document.querySelector('.hero');
   if (!hero) return;
 
-  const eyebrow = hero.querySelector('.hero__eyebrow');
+  const eyebrow    = hero.querySelector('.hero__eyebrow');
   const titleLines = hero.querySelectorAll('.hero__title-line');
-  const meta = hero.querySelector('.hero__meta');
+  const meta       = hero.querySelector('.hero__meta');
 
-  gsap.set([eyebrow, titleLines, meta], { opacity: 0, y: 20 });
-  gsap.to(eyebrow, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.1 });
-  gsap.to(titleLines, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.08, delay: 0.2 });
-  gsap.to(meta, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.55 });
+  gsap.set([eyebrow, titleLines, meta].filter(Boolean), { opacity: 0, y: 24 });
+
+  gsap.to(eyebrow,    { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', delay: 0.05 });
+  gsap.to(titleLines, { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.07, delay: 0.15 });
+  gsap.to(meta,       { opacity: 1, y: 0, duration: 0.55, ease: 'power3.out', delay: 0.45 });
 }
 
 /* ── Hero Parallax ───────────────────────────────────────── */

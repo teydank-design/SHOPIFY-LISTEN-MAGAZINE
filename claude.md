@@ -55,7 +55,7 @@ Créer une expérience de lancement en ligne qui :
 
 | Zone | Animation |
 |---|---|
-| Chargement initial | Intro animée avec grain et reveal typographique |
+| Chargement initial | Ticker .NO → .LISTEN (fond blanc, Inter 900, 15vw) — voir `animation.md` |
 | Hero | Scroll parallax sur l'image de couverture |
 | Galerie produit | Transition fluide entre images, effet hover grain |
 | CTA | Micro-animation au survol (inversion couleurs, déplacement) |

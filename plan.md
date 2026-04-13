@@ -83,7 +83,7 @@
 | Statut | Tâche | Priorité | Notes |
 |--------|-------|----------|-------|
 | `[x]` | Installer GSAP dans le thème | 🔴 Haute | Via CDN dans `layout/theme.liquid` (GSAP 3.12.5) |
-| `[x]` | Intro animée au chargement (grain + reveal typographique) | 🔴 Haute | `snippets/intro-loader.liquid` + GSAP dans `theme.js` |
+| `[x]` | Intro animée au chargement — ticker .NO / .LISTEN | 🔴 Haute | `snippets/intro-loader.liquid` + `initIntroLoader()` — voir `animation.md` |
 | `[x]` | Scroll parallax sur l'image de couverture hero | 🟡 Moyenne | `initHeroParallax()` avec ScrollTrigger |
 | `[x]` | Transitions entre images de la galerie produit | 🟡 Moyenne | `initProductGallery()` avec fade |
 | `[x]` | Micro-animations CTA au survol (inversion couleurs) | 🟡 Moyenne | CSS pur dans `theme.css` |

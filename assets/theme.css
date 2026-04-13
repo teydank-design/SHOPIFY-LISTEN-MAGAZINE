@@ -141,31 +141,39 @@ button {
 .intro-loader {
   position: fixed;
   inset: 0;
-  background: var(--color-black);
+  background: #FFFFFF;
   z-index: 9997;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 
-.intro-loader__logo {
-  font-size: clamp(32px, 8vw, 96px);
-  font-weight: var(--fw-black);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  clip-path: inset(0 100% 0 0);
+/* Ticker container — items are absolutely positioned inside */
+.intro-ticker {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.intro-loader__sub {
+/* Each word line — height = 25vh so 4 lines = 100vh */
+.intro-ticker__item {
   position: absolute;
-  bottom: clamp(24px, 5vw, 60px);
-  left: var(--margin);
-  font-size: 11px;
-  font-weight: var(--fw-bold);
-  letter-spacing: 0.15em;
+  left: 0;
+  right: 0;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  /* Left-aligned with margin, matching hero left edge */
+  padding-left: clamp(20px, 6vw, 120px);
+  font-family: var(--font-family);
+  font-size: clamp(52px, 15vw, 220px);
+  font-weight: var(--fw-black);
+  color: #000000;
   text-transform: uppercase;
-  opacity: 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  /* Prevent text from wrapping or affecting layout */
+  white-space: nowrap;
+  user-select: none;
+  will-change: transform;
 }
 
 /* ── Typography ──────────────────────────────────────────── */
