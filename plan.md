@@ -97,12 +97,12 @@
 
 | Statut | Tâche | Priorité | Notes |
 |--------|-------|----------|-------|
-| `[ ]` | Lecteur audio custom pour les extraits | 🔴 Haute | Pas d'embed Spotify — player discret et bien designé |
-| `[ ]` | Compteur de stock en temps réel | 🔴 Haute | Urgence d'achat |
-| `[ ]` | Configurer Shopify Payments (Stripe) | 🔴 Haute | |
-| `[ ]` | Configurer les zones de livraison et frais de port | 🔴 Haute | France + International, taxes douanières |
-| `[ ]` | Gérer les taxes et TVA | 🟡 Moyenne | France au minimum |
-| `[ ]` | Prévoir l'architecture multi-opus (Opus 2, Opus 3…) | 🟡 Moyenne | Collections Shopify ou structure de produits |
+| `[x]` | Lecteur audio custom pour les extraits | 🔴 Haute | `snippets/audio-player.liquid` + `initAudioPlayers()` JS |
+| `[x]` | Compteur de stock JS | 🔴 Haute | `updateStockDisplay()` + badge rouge si ≤ 10 |
+| `[ ]` | Configurer Shopify Payments (Stripe) | 🔴 Haute | Dans Shopify admin |
+| `[ ]` | Configurer les zones de livraison et frais de port | 🔴 Haute | Dans Shopify admin — France + International |
+| `[ ]` | Gérer les taxes et TVA | 🟡 Moyenne | Dans Shopify admin |
+| `[ ]` | Prévoir l'architecture multi-opus (Opus 2, Opus 3…) | 🟡 Moyenne | Collections Shopify — structure prête dans le thème |
 
 ---
 
