@@ -155,29 +155,29 @@ function initIntroLoader() {
   async function runSequence() {
     // Phase 1 — .NO  (~300ms entre chaque, la durée d'anim est 650ms)
     await addItem('.NO');  if (skipped) return;
-    await wait(260);
+    await wait(100);
     await addItem('.NO');  if (skipped) return;
-    await wait(260);
+    await wait(100);
     await addItem('.NO');  if (skipped) return;
-    await wait(260);
+    await wait(100);
     await addItem('.NO');  if (skipped) return;
 
     // Pause — 4 lignes à l'écran
-    await wait(500);       if (skipped) return;
+    await wait(280);       if (skipped) return;
 
     // Transition : vider l'écran
     await clearItems();    if (skipped) return;
-    await wait(120);       if (skipped) return;
+    await wait(80);        if (skipped) return;
 
-    // Phase 2 — .LISTEN (~1s entre chaque)
+    // Phase 2 — .LISTEN
     await addItem('.LISTEN'); if (skipped) return;
-    await wait(900);
+    await wait(420);
     await addItem('.LISTEN'); if (skipped) return;
-    await wait(900);
+    await wait(420);
     await addItem('.LISTEN'); if (skipped) return;
 
     // Maintien avant sortie
-    await wait(700);
+    await wait(500);
 
     // Fade out → hero
     dismissLoader();
