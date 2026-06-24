@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -5,9 +14,11 @@
       "settings": {
         "eyebrow": "Magazine — Édition limitée",
         "hero_title": "Listen|Magazine",
+        "product": "",
         "price_display": "25 €",
         "show_edition_badge": true,
         "edition_label": "Édition limitée",
+        "cta_url": "",
         "cta_label": "Commander maintenant",
         "release_date": "Sortie — 20 juin"
       }
@@ -15,10 +26,12 @@
     "about": {
       "type": "about",
       "settings": {
-        "section_number": "01",
+        "section_number": "N°0",
         "eyebrow": "À propos de Listen",
         "manifesto": "<p>Listen est un objet éditorial <strong>brut et vivant</strong>. Ni magazine ordinaire, ni simple boutique en ligne. Un geste culturel — rare, sincère, fait pour durer.</p>",
-        "format_description": "<p>Entre magazine imprimé et expérience digitale. Chaque opus est une édition limitée numérotée, pensée comme un objet à posséder.</p>"
+        "format_description": "<p>Entre magazine imprimé et expérience digitale. Chaque opus est une édition limitée numérotée, pensée comme un objet à posséder.</p>",
+        "instagram": "",
+        "tiktok": ""
       }
     },
     "contributors": {
@@ -27,9 +40,12 @@
         "eyebrow": "Opus 1",
         "title": "Contributeurs",
         "show_extracts": true
-      },
-      "blocks": {}
+      }
     }
   },
-  "order": ["hero", "about", "contributors"]
+  "order": [
+    "hero",
+    "about",
+    "contributors"
+  ]
 }
