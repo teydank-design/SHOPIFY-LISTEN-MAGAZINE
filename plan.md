@@ -100,7 +100,7 @@
 | `[x]` | Lecteur audio custom pour les extraits | 🔴 Haute | `snippets/audio-player.liquid` + `initAudioPlayers()` JS |
 | `[x]` | Compteur de stock JS | 🔴 Haute | `updateStockDisplay()` + badge rouge si ≤ 10 |
 | `[ ]` | Configurer Shopify Payments (Stripe) | 🔴 Haute | Dans Shopify admin |
-| `[ ]` | Configurer les zones de livraison et frais de port | 🔴 Haute | Dans Shopify admin — France + International |
+| `[x]` | Configurer les zones de livraison et frais de port | 🔴 Haute | Fait le 2026-07-03 : France 5 €, UE 10 € (marché UE activé) — expédition sous 7 à 14 jours ouvrés, hors UE désactivé pour l'instant |
 | `[ ]` | Gérer les taxes et TVA | 🟡 Moyenne | Dans Shopify admin |
 | `[ ]` | Prévoir l'architecture multi-opus (Opus 2, Opus 3…) | 🟡 Moyenne | Collections Shopify — structure prête dans le thème |
 
