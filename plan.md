@@ -141,3 +141,10 @@ Ces points doivent être résolus pour avancer sur certaines tâches :
 | Statut | Fonctionnalité | Demandée le | Notes |
 |--------|---------------|-------------|-------|
 | `[x]` | Thème clair : fond blanc / texte noir partout, sauf le hero de la page d'accueil qui reste sombre | 2026-07-02 | `theme.css` + styles inline des sections — voir section "Thème de couleurs" dans `claude.md` |
+| `[x]` | Renommage "Opus 1" → "N°0 Hybridation" + lien header direct vers la page produit | 2026-07-02 | Header, titre onglet, contributeurs, page produit |
+| `[x]` | Menu mobile plein écran blanc (burger) | 2026-07-02 | `header.liquid` + `.mobile-menu` CSS + `initMobileMenu()` JS |
+| `[x]` | Page panier dédiée | 2026-07-02 | `templates/cart.json` + `sections/main-cart.liquid` |
+| `[x]` | Templates 404 et page (mentions légales / CGV) | 2026-07-02 | Contenu des pages à créer dans l'admin Shopify |
+| `[x]` | Génération `grain.png` + `favicon.png` | 2026-07-02 | Le grain était invisible (fichier manquant) |
+| `[x]` | Accessibilité : skip-link + prefers-reduced-motion | 2026-07-02 | `theme.liquid`, `theme.css`, `theme.js` |
+| `[x]` | Retrait du script SplitText inutilisé | 2026-07-02 | `layout/theme.liquid` |

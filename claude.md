@@ -11,6 +11,18 @@ Ce projet consiste à concevoir et développer un **site Shopify** pour le lance
 
 ---
 
+## Fonctionnalités ajoutées le 2 juillet 2026
+
+- **Nom de l'édition** : "Opus 1" renommé **"N°0 Hybridation"** partout (header, titre de l'onglet, section contributeurs, page produit). Le lien du header pointe directement vers la page produit (picker `product_link` dans les réglages du header, fallback : premier produit de la boutique).
+- **Menu mobile** : plein écran **fond blanc**, gros liens noirs (Inter 900), bouton "Menu" dans le header ≤ 768px. Fichiers : `sections/header.liquid`, CSS `.mobile-menu`, JS `initMobileMenu()`.
+- **Page panier dédiée** : `templates/cart.json` + `sections/main-cart.liquid` (quantités +/−, retirer, total, checkout), en plus du drawer.
+- **Templates créés** : `templates/404.liquid` (gros 404 brutal) et `templates/page.liquid` (pour mentions légales / CGV / confidentialité — contenu à créer dans l'admin Shopify).
+- **Assets générés** : `assets/grain.png` (le grain était invisible car le fichier n'existait pas) et `assets/favicon.png` (".L" blanc sur noir).
+- **Accessibilité** : lien "Aller au contenu" (skip-link), respect de `prefers-reduced-motion` (grain figé, intro sautée, reveals affichés directement).
+- **Nettoyage** : script SplitText (GSAP) retiré du `<head>` — jamais utilisé et plugin payant en 3.12.5.
+
+---
+
 ## Thème de couleurs (mis à jour le 2 juillet 2026)
 
 Le site est en **thème clair : fond blanc (#FFFFFF), écriture noire (#0A0A0A)** sur toutes les pages — **sauf le header (hero) de la page d'accueil**, qui reste sombre (image de couverture + overlay noir, texte blanc). La navigation fixe utilise `mix-blend-mode: difference` : elle s'affiche automatiquement en noir sur les sections claires et en blanc sur le hero sombre. L'intro loader (.NO / .LISTEN) reste fond blanc / texte noir et s'enchaîne donc naturellement avec le reste du site.

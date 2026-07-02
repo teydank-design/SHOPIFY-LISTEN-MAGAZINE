@@ -1,0 +1,83 @@
+<section class="cart-page">
+  <div class="container">
+    <h1 class="cart-page__title">Panier</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-page__empty">
+        <p class="t-subtitle">Votre panier est vide.</p>
+        {%- assign first_product = collections.all.products.first -%}
+        {%- if first_product -%}
+          <a href="{{ first_product.url }}" class="btn btn--primary btn--large">
+            Découvrir le N°0
+          </a>
+        {%- else -%}
+          <a href="{{ routes.root_url }}" class="btn btn--primary btn--large">
+            Retour à l'accueil
+          </a>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+
+      {%- for item in cart.items -%}
+        <div class="cart-page__item">
+          <div class="cart-page__item-image">
+            {%- if item.image -%}
+              <img
+                src="{{ item.image | image_url: width: 240 }}"
+                alt="{{ item.title | escape }}"
+                width="120"
+                height="160"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+
+          <div class="cart-page__item-info">
+            <p class="cart-page__item-title">{{ item.product.title }}</p>
+            {%- unless item.variant.title contains 'Default' -%}
+              <p class="t-caption" style="color: var(--color-text-muted);">{{ item.variant.title }}</p>
+            {%- endunless -%}
+
+            <div class="cart-page__qty" aria-label="Quantité">
+              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" aria-label="Réduire la quantité">−</a>
+              <span>{{ item.quantity }}</span>
+              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" aria-label="Augmenter la quantité">+</a>
+            </div>
+          </div>
+
+          <div>
+            <p class="cart-page__item-price">{{ item.final_line_price | money }}</p>
+            <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="cart-page__remove">
+              Retirer
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+
+      <div class="cart-page__footer">
+        <div class="cart-page__total">
+          <span class="t-label">Total</span>
+          <span class="cart-page__total-amount">{{ cart.total_price | money }}</span>
+        </div>
+
+        <p class="t-caption" style="color: var(--color-text-muted);">
+          Taxes incluses. Frais de livraison calculés au paiement.
+        </p>
+
+        {%- form 'cart', cart -%}
+          <button type="submit" name="checkout" class="btn btn--buy cart-page__checkout">
+            Commander — {{ cart.total_price | money }}
+          </button>
+        {%- endform -%}
+      </div>
+
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Panier",
+  "tag": "div"
+}
+{% endschema %}

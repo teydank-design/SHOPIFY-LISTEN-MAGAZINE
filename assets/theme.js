@@ -3,16 +3,21 @@
    GSAP animations, custom cursor, intro loader, scroll reveals
    ============================================================ */
 
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 document.addEventListener('DOMContentLoaded', () => {
   initCursor();
   initScrollReveals();
   initProductGallery();
   initAudioPlayers();
   initCartDrawer();
+  initMobileMenu();
 
-  if (document.querySelector('.intro-loader')) {
+  const loader = document.querySelector('.intro-loader');
+  if (loader && !REDUCED_MOTION) {
     initIntroLoader();
   } else {
+    loader?.remove();
     revealPage();
   }
 });
@@ -192,7 +197,7 @@ function initIntroLoader() {
 
 /* ── Hero reveal (appelé après la sortie du loader) ─────── */
 function revealPage() {
-  if (typeof gsap === 'undefined') return;
+  if (typeof gsap === 'undefined' || REDUCED_MOTION) return;
 
   const hero = document.querySelector('.hero');
   if (!hero) return;
@@ -229,6 +234,12 @@ function initHeroParallax() {
 
 /* ── Scroll Reveals ──────────────────────────────────────── */
 function initScrollReveals() {
+  if (REDUCED_MOTION) {
+    // Tout est affiché directement, sans animation (géré aussi en CSS)
+    document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
   if (typeof gsap === 'undefined') {
     // Fallback: IntersectionObserver without GSAP
     const observer = new IntersectionObserver((entries) => {
@@ -398,6 +409,41 @@ function initCartDrawer() {
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeCart();
+  });
+}
+
+/* ── Mobile Menu ─────────────────────────────────────────── */
+function initMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const openBtn = document.querySelector('[data-menu-open]');
+
+  if (!menu || !openBtn) return;
+
+  function openMenu() {
+    menu.classList.add('is-open');
+    menu.setAttribute('aria-hidden', 'false');
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    menu.setAttribute('aria-hidden', 'true');
+    openBtn.setAttribute('aria-expanded', 'false');
+    // Ne pas réactiver le scroll si le drawer panier vient de s'ouvrir par-dessus
+    if (!document.querySelector('.cart-drawer.is-open')) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  openBtn.addEventListener('click', openMenu);
+
+  menu.querySelectorAll('[data-menu-close]').forEach(el => {
+    el.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
   });
 }
 

@@ -57,7 +57,7 @@
         <!-- Title -->
         <h1 class="product-info__title" data-reveal>{{ product.title }}</h1>
         <p class="product-info__opus t-label" data-reveal>
-          {{- product.metafields.custom.opus_number | default: 'Opus 1' -}}
+          {{- product.metafields.custom.opus_number | default: 'N°0 Hybridation' -}}
         </p>
 
         <!-- Price -->
@@ -119,7 +119,7 @@
             <p class="t-label" style="margin-bottom: 12px; color: var(--color-text-muted);">Extrait audio</p>
             {%- render 'audio-player',
               src: product.metafields.custom.audio_url,
-              track_name: product.metafields.custom.audio_track_name | default: 'Extrait — Opus 1'
+              track_name: product.metafields.custom.audio_track_name | default: 'Extrait — N°0 Hybridation'
             -%}
           </div>
         {%- endif -%}

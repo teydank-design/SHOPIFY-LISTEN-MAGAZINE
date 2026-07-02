@@ -1,3 +1,14 @@
+{%- comment -%}
+  Lien produit : pointe directement vers la page produit (choisie via le
+  picker "product_link"), sinon vers le premier produit de la boutique.
+{%- endcomment -%}
+{%- assign nav_product = all_products[section.settings.product_link] -%}
+{%- if nav_product.url != blank -%}
+  {%- assign product_url = nav_product.url -%}
+{%- else -%}
+  {%- assign product_url = collections.all.products.first.url | default: routes.root_url -%}
+{%- endif -%}
+
 <nav class="site-nav" role="navigation" aria-label="Navigation principale">
   <a href="{{ routes.root_url }}" class="site-nav__logo" aria-label="{{ shop.name }}">
     {{- section.settings.logo_text | default: shop.name -}}
@@ -7,20 +18,46 @@
     <li><a href="{{ routes.root_url }}">Accueil</a></li>
     {%- if section.settings.show_product_link -%}
       <li>
-        <a href="{{ routes.collections_url }}/opus-1">
-          {{ section.settings.product_link_label | default: 'Opus 1' }}
+        <a href="{{ product_url }}">
+          {{ section.settings.product_link_label | default: 'N°0 Hybridation' }}
         </a>
       </li>
     {%- endif -%}
     {%- if section.settings.show_about_link -%}
-      <li><a href="#about">{{ section.settings.about_link_label | default: 'À propos' }}</a></li>
+      <li><a href="{{ routes.root_url }}#about">{{ section.settings.about_link_label | default: 'À propos' }}</a></li>
     {%- endif -%}
   </ul>
 
-  <button class="btn btn--outline" style="padding:10px 20px; font-size:11px;" data-open-cart aria-label="Ouvrir le panier">
-    Panier ({{ cart.item_count }})
-  </button>
+  <div class="site-nav__actions">
+    <button class="btn btn--outline site-nav__cart" data-open-cart aria-label="Ouvrir le panier">
+      Panier (<span data-cart-count>{{ cart.item_count }}</span>)
+    </button>
+
+    <button class="site-nav__burger" data-menu-open aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+      Menu
+    </button>
+  </div>
 </nav>
+
+<!-- Menu mobile plein écran (fond blanc) — hors du nav pour échapper au mix-blend-mode -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mobile-menu__close" data-menu-close aria-label="Fermer le menu">Fermer</button>
+
+  <nav class="mobile-menu__links" aria-label="Menu mobile">
+    <a href="{{ routes.root_url }}" data-menu-close>Accueil</a>
+    {%- if section.settings.show_product_link -%}
+      <a href="{{ product_url }}" data-menu-close>
+        {{ section.settings.product_link_label | default: 'N°0 Hybridation' }}
+      </a>
+    {%- endif -%}
+    {%- if section.settings.show_about_link -%}
+      <a href="{{ routes.root_url }}#about" data-menu-close>{{ section.settings.about_link_label | default: 'À propos' }}</a>
+    {%- endif -%}
+    <button data-open-cart data-menu-close class="mobile-menu__cart">
+      Panier (<span data-cart-count>{{ cart.item_count }}</span>)
+    </button>
+  </nav>
+</div>
 
 {% schema %}
 {
@@ -35,14 +72,19 @@
     {
       "type": "checkbox",
       "id": "show_product_link",
-      "label": "Afficher lien Opus 1",
+      "label": "Afficher lien produit",
       "default": true
     },
     {
       "type": "text",
       "id": "product_link_label",
       "label": "Label lien produit",
-      "default": "Opus 1"
+      "default": "N°0 Hybridation"
+    },
+    {
+      "type": "product",
+      "id": "product_link",
+      "label": "Produit lié (lien direct)"
     },
     {
       "type": "checkbox",

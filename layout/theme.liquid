@@ -7,7 +7,7 @@
 
   <title>
     {%- if template == 'index' -%}
-      {{ shop.name }} — Opus 1
+      {{ shop.name }} — N°0 Hybridation
     {%- elsif page_title == blank -%}
       {{ shop.name }}
     {%- else -%}
@@ -34,8 +34,8 @@
   <!-- Canonical -->
   <link rel="canonical" href="{{ canonical_url }}">
 
-  <!-- Favicon (placeholder — replace with actual Listen logo) -->
-  <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | asset_url }}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ 'favicon.png' | asset_url }}">
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,15 +45,17 @@
   <!-- Theme CSS -->
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
-  <!-- GSAP (CDN) -->
+  <!-- GSAP (CDN) — SplitText retiré : jamais utilisé dans theme.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js" defer></script>
 
   {{ content_for_header }}
 </head>
 
 <body class="template-{{ template | replace: '.', '-' }}">
+
+  <!-- Accessibilité : aller directement au contenu -->
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
 
   <!-- Grain overlay — soul of Listen -->
   {%- render 'grain-overlay' -%}
