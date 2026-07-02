@@ -11,6 +11,12 @@ Ce projet consiste à concevoir et développer un **site Shopify** pour le lance
 
 ---
 
+## Thème de couleurs (mis à jour le 2 juillet 2026)
+
+Le site est en **thème clair : fond blanc (#FFFFFF), écriture noire (#0A0A0A)** sur toutes les pages — **sauf le header (hero) de la page d'accueil**, qui reste sombre (image de couverture + overlay noir, texte blanc). La navigation fixe utilise `mix-blend-mode: difference` : elle s'affiche automatiquement en noir sur les sections claires et en blanc sur le hero sombre. L'intro loader (.NO / .LISTEN) reste fond blanc / texte noir et s'enchaîne donc naturellement avec le reste du site.
+
+---
+
 ## Objectif principal
 
 Créer une expérience de lancement en ligne qui :

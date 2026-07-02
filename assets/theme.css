@@ -5,11 +5,12 @@
 
 /* ── Variables ───────────────────────────────────────────── */
 :root {
-  --color-bg:          #0A0A0A;
-  --color-bg-alt:      #1C1C1C;
+  --color-bg:          #FFFFFF;
+  --color-bg-alt:      #F2F0EB;
   --color-bg-paper:    #F2F0EB;
-  --color-text:        #FFFFFF;
-  --color-text-muted:  #555555;
+  --color-text:        #0A0A0A;
+  --color-text-muted:  #666666;
+  --color-dark:        #0A0A0A;
   --color-black:       #000000;
   --color-accent-red:  #E5001B;
   --color-accent-yellow: #FFE600;
@@ -115,7 +116,7 @@ button {
   left: 0;
   width: 12px;
   height: 12px;
-  background: var(--color-text);
+  background: #FFFFFF; /* blanc fixe : mix-blend-mode difference le rend visible sur fond clair ET sombre */
   border-radius: 50%;
   pointer-events: none;
   z-index: var(--z-cursor);
@@ -250,6 +251,12 @@ section {
   color: var(--color-black);
 }
 
+/* Le hero de la page d'accueil reste sombre (exception au thème clair) */
+.hero.section--dark {
+  background: var(--color-dark);
+  color: #FFFFFF;
+}
+
 /* ── Scroll reveal ───────────────────────────────────────── */
 [data-reveal] {
   opacity: 0;
@@ -284,12 +291,14 @@ section {
   mix-blend-mode: difference;
 }
 
+/* La nav reste en blanc fixe : le mix-blend-mode difference l'affiche
+   en noir sur fond clair et en blanc sur le hero sombre */
 .site-nav__logo {
   font-size: clamp(14px, 1.2vw, 18px);
   font-weight: var(--fw-black);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: #FFFFFF;
 }
 
 .site-nav__links {
@@ -303,7 +312,7 @@ section {
   font-weight: var(--fw-bold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: #FFFFFF;
   position: relative;
 }
 
@@ -314,8 +323,18 @@ section {
   bottom: -2px;
   width: 0;
   height: 1px;
-  background: var(--color-text);
+  background: #FFFFFF;
   transition: width 0.2s ease-out;
+}
+
+.site-nav .btn--outline {
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}
+
+.site-nav .btn--outline:hover {
+  background: #FFFFFF;
+  color: #000000;
 }
 
 .site-nav__links a:hover::after {
@@ -365,6 +384,18 @@ section {
 .btn--large {
   padding: 18px 40px;
   font-size: 13px;
+}
+
+/* Boutons dans le hero sombre : inversés par rapport au thème clair */
+.hero .btn--primary {
+  background: #FFFFFF;
+  color: #0A0A0A;
+  border-color: #FFFFFF;
+}
+
+.hero .btn--primary:hover {
+  background: transparent;
+  color: #FFFFFF;
 }
 
 /* ── Hero ────────────────────────────────────────────────── */
@@ -595,9 +626,9 @@ section {
 .product-info__description {
   font-size: 15px;
   line-height: 1.7;
-  color: rgba(255,255,255,0.75);
+  color: rgba(0,0,0,0.75);
   margin-bottom: 40px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(0,0,0,0.12);
   padding-top: 32px;
 }
 
@@ -639,7 +670,7 @@ section {
   align-items: center;
   gap: 16px;
   padding: 16px 20px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(0,0,0,0.12);
   background: var(--color-bg-alt);
 }
 
@@ -649,7 +680,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(0,0,0,0.3);
   flex-shrink: 0;
   transition: background 0.2s, color 0.2s;
   cursor: none;
@@ -684,7 +715,7 @@ section {
 .audio-player__progress {
   margin-top: 6px;
   height: 1px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.15);
   position: relative;
   cursor: none;
 }
@@ -715,7 +746,7 @@ section {
   font-size: clamp(120px, 20vw, 280px);
   font-weight: var(--fw-black);
   line-height: 1;
-  color: rgba(255,255,255,0.04);
+  color: rgba(0,0,0,0.05);
   position: absolute;
   top: -0.1em;
   left: calc(var(--margin) - 0.02em);
@@ -738,7 +769,7 @@ section {
 /* ── Contributors ─────────────────────────────────────────── */
 .contributors-section {
   padding: clamp(60px, 10vw, 140px) 0;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .contributor-card {
@@ -783,9 +814,9 @@ section {
 
 /* ── Footer ──────────────────────────────────────────────── */
 .site-footer {
-  background: var(--color-black);
+  background: var(--color-bg);
   padding: clamp(60px, 8vw, 120px) 0 clamp(32px, 4vw, 48px);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .footer-top {
@@ -793,7 +824,7 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: var(--gutter);
   padding-bottom: clamp(40px, 6vw, 80px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
   margin-bottom: clamp(32px, 4vw, 48px);
 }
 
@@ -808,7 +839,7 @@ section {
 .newsletter-form {
   display: flex;
   gap: 0;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(0,0,0,0.25);
 }
 
 .newsletter-form input[type="email"] {
@@ -841,7 +872,7 @@ section {
 }
 
 .newsletter-form button:hover {
-  background: rgba(255,255,255,0.85);
+  background: rgba(0,0,0,0.8);
 }
 
 .footer-social {
@@ -935,7 +966,7 @@ section {
 
 .cart-drawer__header {
   padding: 28px 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -954,13 +985,13 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(0,0,0,0.2);
   cursor: none;
   transition: background 0.2s;
 }
 
 .cart-drawer__close:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.06);
 }
 
 /* ── Responsive ──────────────────────────────────────────── */

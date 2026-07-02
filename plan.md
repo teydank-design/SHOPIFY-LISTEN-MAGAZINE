@@ -140,4 +140,4 @@ Ces points doivent être résolus pour avancer sur certaines tâches :
 
 | Statut | Fonctionnalité | Demandée le | Notes |
 |--------|---------------|-------------|-------|
-| | *(aucune pour l'instant)* | | |
+| `[x]` | Thème clair : fond blanc / texte noir partout, sauf le hero de la page d'accueil qui reste sombre | 2026-07-02 | `theme.css` + styles inline des sections — voir section "Thème de couleurs" dans `claude.md` |
