@@ -74,7 +74,7 @@
 |--------|-------|----------|-------|
 | `[x]` | Newsletter signup (Shopify natif) | 🟡 Moyenne | `sections/footer.liquid` |
 | `[x]` | Liens réseaux sociaux | 🟢 Basse | Paramètres Instagram / TikTok / X |
-| `[ ]` | Mentions légales | 🟡 Moyenne | Créer la page dans Shopify admin |
+| `[x]` | Mentions légales | 🟡 Moyenne | Pages créées le 2026-07-02 : mentions-legales, cgv, confidentialite — SIRET/adresse/médiateur `[À COMPLÉTER]` |
 
 ---
 
