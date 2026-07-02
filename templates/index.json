@@ -12,6 +12,7 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "hero_image": "shopify://shop_images/promo-1-1.png",
         "eyebrow": "Magazine — Édition limitée",
         "hero_title": "Listen|Magazine",
         "product": "",

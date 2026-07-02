@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_bg": "#0A0A0A",
@@ -7,6 +16,33 @@
     "grain_animated": true,
     "social_instagram": "",
     "social_tiktok": "",
-    "social_twitter": ""
+    "social_twitter": "",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_text": ".LISTEN",
+          "show_product_link": true,
+          "product_link_label": "Opus 1",
+          "show_about_link": true,
+          "about_link_label": "À propos"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "newsletter_title": "Restez dans la boucle",
+          "newsletter_placeholder": "Votre email",
+          "newsletter_cta": "OK",
+          "instagram": "",
+          "tiktok": "",
+          "twitter": "",
+          "tagline": "Brut. Vivant. Collectif.",
+          "legal_url": "",
+          "privacy_url": ""
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
