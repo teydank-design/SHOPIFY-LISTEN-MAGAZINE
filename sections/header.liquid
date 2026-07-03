@@ -20,7 +20,12 @@
         height="{{ section.settings.logo_image.height }}"
       >
     {%- else -%}
-      {{- section.settings.logo_text | default: shop.name -}}
+      {%- assign logo_line = section.settings.logo_text | default: '.LISTEN' -%}
+      <span class="site-nav__logo-stack">
+        <span>{{ logo_line }}</span>
+        <span>{{ logo_line }}</span>
+        <span>{{ logo_line }}</span>
+      </span>
     {%- endif -%}
   </a>
 
@@ -35,6 +40,13 @@
     {%- endif -%}
     {%- if section.settings.show_about_link -%}
       <li><a href="{{ routes.root_url }}#about">{{ section.settings.about_link_label | default: 'À propos' }}</a></li>
+    {%- endif -%}
+    {%- if section.settings.show_blog_link -%}
+      <li>
+        <a href="{{ section.settings.blog_url | default: 'https://listen-magazine.com' }}" target="_blank" rel="noopener">
+          {{ section.settings.blog_link_label | default: 'Blog' }}
+        </a>
+      </li>
     {%- endif -%}
   </ul>
 
@@ -62,6 +74,11 @@
     {%- endif -%}
     {%- if section.settings.show_about_link -%}
       <a href="{{ routes.root_url }}#about" data-menu-close>{{ section.settings.about_link_label | default: 'À propos' }}</a>
+    {%- endif -%}
+    {%- if section.settings.show_blog_link -%}
+      <a href="{{ section.settings.blog_url | default: 'https://listen-magazine.com' }}" target="_blank" rel="noopener" data-menu-close>
+        {{ section.settings.blog_link_label | default: 'Blog' }}
+      </a>
     {%- endif -%}
     <button data-open-cart data-menu-close class="mobile-menu__cart">
       Panier (<span data-cart-count>{{ cart.item_count }}</span>)
@@ -113,6 +130,24 @@
       "id": "about_link_label",
       "label": "Label À propos",
       "default": "À propos"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_blog_link",
+      "label": "Afficher lien Blog",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "blog_link_label",
+      "label": "Label lien Blog",
+      "default": "Blog"
+    },
+    {
+      "type": "text",
+      "id": "blog_url",
+      "label": "URL du Blog",
+      "default": "https://listen-magazine.com"
     }
   ]
 }

@@ -329,6 +329,17 @@ section {
   display: block;
 }
 
+/* Logo texte empilé : .LISTEN × 3, Inter gras */
+.site-nav__logo-stack {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .site-nav__links {
   display: flex;
   gap: clamp(20px, 3vw, 40px);
@@ -932,6 +943,17 @@ section {
   background: var(--color-bg);
   padding: clamp(60px, 8vw, 120px) 0 clamp(32px, 4vw, 48px);
   border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: var(--fw-black);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: clamp(40px, 6vw, 72px);
 }
 
 .footer-top {

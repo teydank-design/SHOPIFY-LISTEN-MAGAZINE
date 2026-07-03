@@ -1,6 +1,13 @@
 <footer class="site-footer section--dark">
   <div class="container">
 
+    {%- assign footer_logo_line = section.settings.logo_text | default: '.LISTEN' -%}
+    <p class="footer-logo" data-reveal>
+      <span>{{ footer_logo_line }}</span>
+      <span>{{ footer_logo_line }}</span>
+      <span>{{ footer_logo_line }}</span>
+    </p>
+
     <div class="footer-top">
       <!-- Newsletter -->
       <div class="footer-newsletter">
@@ -84,6 +91,12 @@
 {
   "name": "Footer",
   "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Texte du logo (répété 3 fois)",
+      "default": ".LISTEN"
+    },
     {
       "type": "header",
       "content": "Newsletter"

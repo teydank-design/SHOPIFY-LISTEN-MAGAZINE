@@ -152,3 +152,5 @@ Ces points doivent être résolus pour avancer sur certaines tâches :
 | `[x]` | Header : logo en image (réglage `logo_image`) | 2026-07-03 | PNG blanc/monochrome recommandé (nav en blend difference) |
 | `[x]` | Hero : CTA achat toujours visible (fallback premier produit) | 2026-07-03 | `hero.liquid` |
 | `[x]` | Retrait du mot "numérotée" (badge produit, à propos, CGV) | 2026-07-03 | Thème + page CGV dans l'admin |
+| `[x]` | Logo ".LISTEN" ×3 empilé (header + footer, Inter gras) | 2026-07-03 | `header.liquid`, `footer.liquid`, CSS |
+| `[x]` | Lien Blog dans le header → listen-magazine.com | 2026-07-03 | Réglages `show_blog_link` / `blog_url`, aussi dans le menu mobile |
