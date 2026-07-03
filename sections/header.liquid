@@ -9,6 +9,18 @@
   {%- assign product_url = collections.all.products.first.url | default: routes.root_url -%}
 {%- endif -%}
 
+{%- comment -%}
+  Garde-fou : le lien À propos avait été renommé "BLOG" dans l'éditeur avant
+  qu'un vrai lien Blog existe. S'il porte encore ce label, on le masque pour
+  éviter un doublon avec le lien Blog dédié.
+{%- endcomment -%}
+{%- assign about_label = section.settings.about_link_label | default: 'À propos' -%}
+{%- assign about_label_up = about_label | strip | upcase -%}
+{%- assign show_about = section.settings.show_about_link -%}
+{%- if about_label_up == 'BLOG' -%}
+  {%- assign show_about = false -%}
+{%- endif -%}
+
 <nav class="site-nav" role="navigation" aria-label="Navigation principale">
   <a href="{{ routes.root_url }}" class="site-nav__logo" aria-label="{{ shop.name }}">
     {%- if section.settings.logo_image != blank -%}
@@ -20,7 +32,14 @@
         height="{{ section.settings.logo_image.height }}"
       >
     {%- else -%}
-      {%- assign logo_line = section.settings.logo_text | default: '.LISTEN' -%}
+      {%- comment -%}
+        Garde-fou : si le réglage est vide ou trop court (ex. "." resté
+        dans l'éditeur), on retombe sur ".LISTEN".
+      {%- endcomment -%}
+      {%- assign logo_line = section.settings.logo_text | strip -%}
+      {%- if logo_line.size < 2 -%}
+        {%- assign logo_line = '.LISTEN' -%}
+      {%- endif -%}
       <span class="site-nav__logo-stack">
         <span>{{ logo_line }}</span>
         <span>{{ logo_line }}</span>
@@ -38,8 +57,8 @@
         </a>
       </li>
     {%- endif -%}
-    {%- if section.settings.show_about_link -%}
-      <li><a href="{{ routes.root_url }}#about">{{ section.settings.about_link_label | default: 'À propos' }}</a></li>
+    {%- if show_about -%}
+      <li><a href="{{ routes.root_url }}#about">{{ about_label }}</a></li>
     {%- endif -%}
     {%- if section.settings.show_blog_link -%}
       <li>
@@ -72,8 +91,8 @@
         {{ section.settings.product_link_label | default: 'N°0 Hybridation' }}
       </a>
     {%- endif -%}
-    {%- if section.settings.show_about_link -%}
-      <a href="{{ routes.root_url }}#about" data-menu-close>{{ section.settings.about_link_label | default: 'À propos' }}</a>
+    {%- if show_about -%}
+      <a href="{{ routes.root_url }}#about" data-menu-close>{{ about_label }}</a>
     {%- endif -%}
     {%- if section.settings.show_blog_link -%}
       <a href="{{ section.settings.blog_url | default: 'https://listen-magazine.com' }}" target="_blank" rel="noopener" data-menu-close>
