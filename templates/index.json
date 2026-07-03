@@ -17,7 +17,7 @@
         "hero_title": "Listen|Magazine",
         "product": "",
         "price_display": "25 €",
-        "show_edition_badge": true,
+        "show_edition_badge": false,
         "edition_label": "Édition limitée",
         "cta_url": "",
         "cta_label": "Commander maintenant",
