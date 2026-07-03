@@ -37,6 +37,46 @@
     },
     "contributors": {
       "type": "contributors",
+      "blocks": {
+        "contributor-1": {
+          "type": "contributor",
+          "settings": {
+            "name": "Nom de l'artiste",
+            "role": "Photographe",
+            "url": ""
+          }
+        },
+        "contributor-2": {
+          "type": "contributor",
+          "settings": {
+            "name": "Nom de l'artiste",
+            "role": "Rédacteur·ice",
+            "url": ""
+          }
+        },
+        "contributor-3": {
+          "type": "contributor",
+          "settings": {
+            "name": "Nom de l'artiste",
+            "role": "Illustrateur·ice",
+            "url": ""
+          }
+        },
+        "contributor-4": {
+          "type": "contributor",
+          "settings": {
+            "name": "Nom de l'artiste",
+            "role": "Musicien·ne",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "contributor-1",
+        "contributor-2",
+        "contributor-3",
+        "contributor-4"
+      ],
       "settings": {
         "eyebrow": "N°0 Hybridation",
         "title": "Contributeurs",
