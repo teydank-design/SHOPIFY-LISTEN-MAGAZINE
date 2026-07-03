@@ -37,9 +37,17 @@
       {%- endfor -%}
     </h1>
 
+    {%- comment -%}
+      Produit lié : celui choisi dans les réglages, sinon le premier produit
+      de la boutique — le CTA d'achat est ainsi toujours affiché.
+    {%- endcomment -%}
+    {%- assign hero_product = all_products[section.settings.product] -%}
+    {%- if hero_product.url == blank -%}
+      {%- assign hero_product = collections.all.products.first -%}
+    {%- endif -%}
+
     <div class="hero__meta">
-      {%- if section.settings.product != blank -%}
-        {%- assign hero_product = all_products[section.settings.product] -%}
+      {%- if hero_product.price -%}
         <span class="hero__price">{{ hero_product.price | money }}</span>
       {%- elsif section.settings.price_display != blank -%}
         <span class="hero__price">{{ section.settings.price_display }}</span>
@@ -55,7 +63,7 @@
         <a href="{{ section.settings.cta_url }}" class="btn btn--primary btn--large">
           {{- section.settings.cta_label | default: 'Commander maintenant' -}}
         </a>
-      {%- elsif section.settings.product != blank -%}
+      {%- elsif hero_product.url != blank -%}
         <a href="{{ hero_product.url }}" class="btn btn--primary btn--large">
           {{- section.settings.cta_label | default: 'Commander maintenant' -}}
         </a>

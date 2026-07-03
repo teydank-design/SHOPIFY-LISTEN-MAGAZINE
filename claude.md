@@ -11,6 +11,15 @@ Ce projet consiste à concevoir et développer un **site Shopify** pour le lance
 
 ---
 
+## Fonctionnalités ajoutées le 3 juillet 2026
+
+- **Contributeurs** : images en **carré** (aspect-ratio 1:1), nom de l'artiste directement sous l'image, rôle en dessous.
+- **Header** : réglage `logo_image` (image picker) pour afficher le logo du magazine en image à la place du texte — privilégier un PNG blanc/monochrome à cause du `mix-blend-mode: difference` de la nav.
+- **Hero** : le CTA "Commander maintenant" est **toujours affiché** — produit choisi dans les réglages, sinon fallback automatique sur le premier produit de la boutique (prix réel affiché aussi).
+- **"Numérotée" supprimé** de tous les textes publics ("Édition limitée" seul) : badge page produit, section À propos, CGV (articles 2 et 5). Le bloc "Votre exemplaire N°X" (metafield) reste disponible.
+
+---
+
 ## Fonctionnalités ajoutées le 2 juillet 2026
 
 - **Nom de l'édition** : "Opus 1" renommé **"N°0 Hybridation"** partout (header, titre de l'onglet, section contributeurs, page produit). Le lien du header pointe directement vers la page produit (picker `product_link` dans les réglages du header, fallback : premier produit de la boutique).

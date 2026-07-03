@@ -148,3 +148,7 @@ Ces points doivent être résolus pour avancer sur certaines tâches :
 | `[x]` | Génération `grain.png` + `favicon.png` | 2026-07-02 | Le grain était invisible (fichier manquant) |
 | `[x]` | Accessibilité : skip-link + prefers-reduced-motion | 2026-07-02 | `theme.liquid`, `theme.css`, `theme.js` |
 | `[x]` | Retrait du script SplitText inutilisé | 2026-07-02 | `layout/theme.liquid` |
+| `[x]` | Contributeurs : images carrées + nom sous l'image | 2026-07-03 | `contributors.liquid` + CSS aspect-ratio 1/1 |
+| `[x]` | Header : logo en image (réglage `logo_image`) | 2026-07-03 | PNG blanc/monochrome recommandé (nav en blend difference) |
+| `[x]` | Hero : CTA achat toujours visible (fallback premier produit) | 2026-07-03 | `hero.liquid` |
+| `[x]` | Retrait du mot "numérotée" (badge produit, à propos, CGV) | 2026-07-03 | Thème + page CGV dans l'admin |

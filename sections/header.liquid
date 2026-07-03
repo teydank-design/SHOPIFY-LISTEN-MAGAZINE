@@ -11,7 +11,17 @@
 
 <nav class="site-nav" role="navigation" aria-label="Navigation principale">
   <a href="{{ routes.root_url }}" class="site-nav__logo" aria-label="{{ shop.name }}">
-    {{- section.settings.logo_text | default: shop.name -}}
+    {%- if section.settings.logo_image != blank -%}
+      <img
+        src="{{ section.settings.logo_image | image_url: width: 400 }}"
+        alt="{{ shop.name }}"
+        class="site-nav__logo-img"
+        width="{{ section.settings.logo_image.width }}"
+        height="{{ section.settings.logo_image.height }}"
+      >
+    {%- else -%}
+      {{- section.settings.logo_text | default: shop.name -}}
+    {%- endif -%}
   </a>
 
   <ul class="site-nav__links">
@@ -64,9 +74,15 @@
   "name": "Header",
   "settings": [
     {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo (image)",
+      "info": "Utiliser de préférence un logo blanc ou monochrome (PNG fond transparent) : la navigation s'affiche en incrustation et s'adapte automatiquement aux fonds clairs et sombres. Remplace le texte du logo si défini."
+    },
+    {
       "type": "text",
       "id": "logo_text",
-      "label": "Texte du logo",
+      "label": "Texte du logo (si pas d'image)",
       "default": "Listen"
     },
     {
