@@ -154,3 +154,5 @@ Ces points doivent être résolus pour avancer sur certaines tâches :
 | `[x]` | Retrait du mot "numérotée" (badge produit, à propos, CGV) | 2026-07-03 | Thème + page CGV dans l'admin |
 | `[x]` | Logo ".LISTEN" ×3 empilé (header + footer, Inter gras) | 2026-07-03 | `header.liquid`, `footer.liquid`, CSS |
 | `[x]` | Lien Blog dans le header → listen-magazine.com | 2026-07-03 | Réglages `show_blog_link` / `blog_url`, aussi dans le menu mobile |
+| `[x]` | Contributeurs : carré cliquable (lien) + nom dessous, placeholders éditeur | 2026-07-03 | Blocs à remplir dans l'éditeur de thème |
+| `[x]` | Tagline « Pour les petits artistes et les grands auditeurs » (hero, produit, footer) | 2026-07-03 | Classe `.brand-tagline` (rouge accent) |

@@ -14,6 +14,8 @@ Ce projet consiste à concevoir et développer un **site Shopify** pour le lance
 ## Fonctionnalités ajoutées le 3 juillet 2026
 
 - **Logo empilé** : ".LISTEN" répété 3 fois l'un sous l'autre, Inter gras (900), dans le **header** (petit, remplacé par `logo_image` si définie) et le **footer** (grand, en tête de section, texte configurable via `logo_text` du footer).
+- **Contributeurs refondus** : image **carrée cliquable** (réglage `url` par bloc — Instagram/portfolio, nouvel onglet), **nom sous l'image**, rôle optionnel en dessous. Section masquée sur la boutique tant qu'aucun bloc n'est ajouté ; carrés d'exemple visibles dans l'éditeur de thème (`request.design_mode`). Les contributeurs s'ajoutent dans l'éditeur : section Contributeurs → Ajouter un bloc.
+- **Tagline de marque** : « Pour les petits artistes et les grands auditeurs » affichée en rouge accent (`.brand-tagline`) dans le hero, la page produit (sous la livraison) et le footer (toutes les pages).
 - **Lien Blog dans le header** : pointe vers **https://listen-magazine.com** (nouvel onglet). Réglables : `show_blog_link`, `blog_link_label`, `blog_url`. Présent aussi dans le menu mobile.
 
 - **Contributeurs** : images en **carré** (aspect-ratio 1:1), nom de l'artiste directement sous l'image, rôle en dessous.
