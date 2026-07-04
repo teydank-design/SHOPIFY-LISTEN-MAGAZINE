@@ -56,15 +56,6 @@
             "url": ""
           }
         },
-        "contributor_T4NqHa": {
-          "type": "contributor",
-          "settings": {
-            "image": "shopify://shop_images/page_2.png",
-            "name": "Mounir haddad",
-            "role": "Fondateur de la marque Brique",
-            "url": ""
-          }
-        },
         "contributor-3": {
           "type": "contributor",
           "settings": {
@@ -80,14 +71,23 @@
             "role": "MAnager de jahÏem et et fondateur du média RNBRENAISSANCE",
             "url": ""
           }
+        },
+        "contributor_T4NqHa": {
+          "type": "contributor",
+          "settings": {
+            "image": "shopify://shop_images/page_2.png",
+            "name": "Mounir haddad",
+            "role": "Fondateur de la marque Brique",
+            "url": ""
+          }
         }
       },
       "block_order": [
         "contributor-1",
         "contributor-2",
-        "contributor_T4NqHa",
         "contributor-3",
-        "contributor-4"
+        "contributor-4",
+        "contributor_T4NqHa"
       ],
       "settings": {
         "eyebrow": "N°0 Hybridation",
