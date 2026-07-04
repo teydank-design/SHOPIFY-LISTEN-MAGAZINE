@@ -41,7 +41,8 @@
         "contributor-1": {
           "type": "contributor",
           "settings": {
-            "name": "Nom de l'artiste",
+            "image": "shopify://shop_images/MOCKUP1.png",
+            "name": "jahîem solo",
             "role": "Photographe",
             "url": ""
           }
