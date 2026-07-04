@@ -80,6 +80,24 @@
             "role": "Fondateur de la marque Brique",
             "url": ""
           }
+        },
+        "contributor_EMJFjd": {
+          "type": "contributor",
+          "settings": {
+            "image": "shopify://shop_images/page_2.png",
+            "name": "SOUANE",
+            "role": "Fondateur de la marque Brique",
+            "url": ""
+          }
+        },
+        "contributor_4h3kjC": {
+          "type": "contributor",
+          "settings": {
+            "image": "shopify://shop_images/page_2.png",
+            "name": "OSCAR",
+            "role": "Fondateur de la marque Brique",
+            "url": ""
+          }
         }
       },
       "block_order": [
@@ -87,7 +105,9 @@
         "contributor-2",
         "contributor-3",
         "contributor-4",
-        "contributor_T4NqHa"
+        "contributor_T4NqHa",
+        "contributor_EMJFjd",
+        "contributor_4h3kjC"
       ],
       "settings": {
         "eyebrow": "N°0 Hybridation",
