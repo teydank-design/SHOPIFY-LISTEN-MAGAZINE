@@ -55,6 +55,14 @@
             "url": ""
           }
         },
+        "contributor_T4NqHa": {
+          "type": "contributor",
+          "settings": {
+            "name": "Nom de l'artiste",
+            "role": "Rédacteur·ice",
+            "url": ""
+          }
+        },
         "contributor-3": {
           "type": "contributor",
           "settings": {
@@ -75,6 +83,7 @@
       "block_order": [
         "contributor-1",
         "contributor-2",
+        "contributor_T4NqHa",
         "contributor-3",
         "contributor-4"
       ],
