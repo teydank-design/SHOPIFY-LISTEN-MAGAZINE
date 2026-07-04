@@ -21,20 +21,21 @@
       "header": {
         "type": "header",
         "settings": {
-          "logo_text": ".LISTEN",
+          "logo_text": ".",
           "show_product_link": true,
           "product_link_label": "N°0 Hybridation",
           "product_link": "",
           "show_about_link": true,
-          "about_link_label": "À propos",
+          "about_link_label": "BLOG",
           "show_blog_link": true,
-          "blog_link_label": "Blog",
+          "blog_link_label": "LE Blog",
           "blog_url": "https://listen-magazine.com"
         }
       },
       "footer": {
         "type": "footer",
         "settings": {
+          "logo_text": ".LISTEN",
           "newsletter_title": "Restez dans la boucle",
           "newsletter_placeholder": "Votre email",
           "newsletter_cta": "OK",
