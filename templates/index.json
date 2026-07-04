@@ -50,8 +50,9 @@
         "contributor-2": {
           "type": "contributor",
           "settings": {
-            "name": "Nom de l'artiste",
-            "role": "Rédacteur·ice",
+            "image": "shopify://shop_images/Image_1.png",
+            "name": "JAHÏEM SOLO",
+            "role": "ARTISTE",
             "url": ""
           }
         },
