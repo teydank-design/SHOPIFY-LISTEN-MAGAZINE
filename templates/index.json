@@ -59,9 +59,10 @@
         "contributor-3": {
           "type": "contributor",
           "settings": {
+            "image": "shopify://shop_images/I_m_that_director_Merci_big_mayltel_pour_les_photos.jpg",
             "name": "David Diarassouba",
             "role": "Réalisateur",
-            "url": ""
+            "url": "https://www.instagram.com/daviddiarrassoubaa/"
           }
         },
         "contributor-4": {
