@@ -121,10 +121,7 @@
         {%- if product.metafields.custom.audio_url != blank -%}
           <div data-reveal style="margin-top: 32px;">
             <p class="t-label" style="margin-bottom: 12px; color: var(--color-text-muted);">Extrait audio</p>
-            {%- render 'audio-player',
-              src: product.metafields.custom.audio_url,
-              track_name: product.metafields.custom.audio_track_name | default: 'Extrait — N°0 Hybridation'
-            -%}
+            {%- render 'audio-player', src: product.metafields.custom.audio_url, track_name: product.metafields.custom.audio_track_name, default: 'Extrait — N°0 Hybridation' -%}
           </div>
         {%- endif -%}
 
@@ -147,3 +144,19 @@
   "tag": "div"
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- render 'audio-player',
+                  src: product.metafields.custom.audio_url,
+                  track_name: product.metafields.custom.audio_track_name | default: 'Extrait — N°0 Hybridation'
+                -%}
+  to: "{%- render 'audio-player', src: product.metafields.custom.audio_url, track_name:
+    product.metafields.custom.audio_track_name, default: 'Extrait — N°0 Hybridation'
+    -%}"
+  position: 4670..4835
+{% endcomment %}
